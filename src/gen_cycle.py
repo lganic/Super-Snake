@@ -150,10 +150,10 @@ class Grid:
         return output
     
 def extract_cycle(model, variable_prefix='cv'):
-    """
+    '''
     Extracts the Hamiltonian cycle from the Z3 model.
     Returns A list of nodes in the order they appear in the Hamiltonian cycle.
-    """
+    '''
     # Extract the node positions from the model
     node_positions = {}
     for var in model.decls():
