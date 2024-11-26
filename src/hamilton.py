@@ -7,6 +7,8 @@
 ############################################
 from z3 import *
 
+set_param("parallel.enable", True) 
+
 def gencon(gr):
     """
     Input a graph as an adjacency list, e.g. {0:[1,2], 1:[2], 2:[1,0]}.

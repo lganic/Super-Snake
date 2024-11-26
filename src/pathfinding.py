@@ -1,5 +1,7 @@
 import heapq
 
+# A* Pathfinding implementation
+
 class Node:
     def __init__(self, position, parent=None):
         self.position = position  # (x, y) coordinates on the grid
@@ -12,9 +14,9 @@ class Node:
     def __lt__(self, other):
         return self.f < other.f
 
-def astar(grid_size, start, end, blocked_nodes):
+def astar(width, height, start, end, blocked_nodes):
     """
-    Perform A* pathfinding on a grid.
+    Perform A* pathfinding on a grid with specified width and height.
     """
     # Convert blocked_nodes to a set for faster lookup
     blocked_set = set(blocked_nodes)
@@ -52,7 +54,7 @@ def astar(grid_size, start, end, blocked_nodes):
 
         for neighbor_pos in neighbors:
             # Check if neighbor is within bounds
-            if (0 <= neighbor_pos[0] < grid_size) and (0 <= neighbor_pos[1] < grid_size):
+            if (0 <= neighbor_pos[0] < width) and (0 <= neighbor_pos[1] < height):
                 # Skip if the node is blocked or already evaluated
                 if neighbor_pos in blocked_set or neighbor_pos in closed_set:
                     continue
@@ -77,10 +79,11 @@ def astar(grid_size, start, end, blocked_nodes):
     # If we reach here, no path was found
     return None
 
+
 if __name__ == "__main__":
     n = 10  # Grid size (10x10 grid)
     start = (0, 0)
-    end = (7, 7)
+    end = (7, 9)
     blocked_nodes = [
         (1, 1), (1, 2), (1, 3), (1, 4),
         (2, 1), (3, 1), (4, 1),
@@ -88,7 +91,8 @@ if __name__ == "__main__":
         (6, 5), (7, 5)
     ]
 
-    path = astar(n, start, end, blocked_nodes)
+    path = astar(11, 10, start, end, blocked_nodes)
+    print(path)
     if path:
         print("Path found:")
         for step in path:
@@ -98,7 +102,7 @@ if __name__ == "__main__":
 
     # Visualization
     # Initialize the grid
-    grid = [['.' for _ in range(n)] for _ in range(n)]
+    grid = [['.' for _ in range(11)] for _ in range(10)]
     for x, y in blocked_nodes:
         grid[y][x] = '#'  # Note: grid[y][x] because y is row index, x is column index
 
