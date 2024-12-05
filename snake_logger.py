@@ -8,6 +8,20 @@ class Log_Stream:
     def close(self):
         self.file_obj.close()
     
+    def log_size(self, size):
+        log_out = f'SIZE: {size}'
+
+        print(log_out)
+
+        self.file_obj.write(log_out + '\n')  # Ensure proper line formatting in the log file        
+
+    def log_restrictions(self, restricts):
+        log_out = f'OBJS: {restricts}'
+
+        print(log_out)
+
+        self.file_obj.write(log_out + '\n')  # Ensure proper line formatting in the log file        
+
     def log_new_apple_pos(self, position):
         log_out = f'APPLE: {position}'
 

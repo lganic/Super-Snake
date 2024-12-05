@@ -1,6 +1,8 @@
 from typing import List, Tuple, Union
-from .hamilton import gencon
-import z3
+# from .hamilton import gencon
+#from .superlight import hamilton_cycle
+# import z3
+from hamilton_cycle_module import hamilton_cycle
 
 class Restrictable_Node:
     '''
@@ -193,19 +195,29 @@ def solve_hamiltonian(grid: Grid) -> Union[None, List[Tuple[int, int]]]:
         new_id = mapping[node_id]
         new_adjaceny[new_id] = [mapping[j] for j in adjaceny[node_id]]
 
-    constraints = gencon(new_adjaceny)
+    # constraints = gencon(new_adjaceny)
 
-    # Run the SAT solver
+    # # Run the SAT solver
 
-    status = constraints.check()
+    # status = constraints.check()
 
-    if status == z3.sat:
+    adjacency_list = []
+
+    for node in new_adjaceny:
+
+        if len(new_adjaceny[node]) < 2:
+            return None
+
+        adjacency_list.append(new_adjaceny[node])
+
+    cycle = hamilton_cycle(adjacency_list)
+
+    if cycle:
         # Solver reached SAT
         # Path exists
 
         # Decompose path from model variable data
     
-        cycle = extract_cycle(constraints.model())
         # Reverse the mapping from before
         reverse_mapping = {v: k for k, v in mapping.items()}
 
