@@ -501,7 +501,6 @@ class graphics:
 			if event.type==pygame.KEYDOWN and event.key==self.fullScreenKey:
 				self.fullscreenToggle=True
 			if not self.noResize and (event.type==pygame.VIDEORESIZE or self.fullscreenToggle or self.resizeBool):
-				pygame.image.save(screen,"testscreen.png")
 				self.resized=True
 				#global screen
 				if self.fullScreen:
