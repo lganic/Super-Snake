@@ -3,6 +3,7 @@ from typing import List, Tuple, Union
 #from .superlight import hamilton_cycle
 # import z3
 from hamilton_cycle_module import hamilton_cycle
+from .analysis import check_hamiltonian_cycle
 
 class Restrictable_Node:
     '''
@@ -194,6 +195,11 @@ def solve_hamiltonian(grid: Grid) -> Union[None, List[Tuple[int, int]]]:
 
         new_id = mapping[node_id]
         new_adjaceny[new_id] = [mapping[j] for j in adjaceny[node_id]]
+
+    if check_hamiltonian_cycle(adjaceny) == 'NOT EXIST':
+        # print('Ignored on analytical basis')
+
+        return None
 
     # constraints = gencon(new_adjaceny)
 

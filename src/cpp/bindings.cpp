@@ -1,7 +1,7 @@
 // bindings.cpp
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
-#include "hamilton_cycle.cpp" // Include your C++ implementation
+#include "hamilton_cycle.cpp"
 
 namespace py = pybind11;
 
