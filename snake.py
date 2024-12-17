@@ -3,6 +3,9 @@ from src import pathfinding
 import random
 from snake_logger import Log_Stream
 
+# This file will run the snake algorithm, and output the results to a log file, which can be animated with 'snake-illustrate-log.py'
+
+
 # WIDTH = 7
 # HEIGHT = 7
 
@@ -12,11 +15,11 @@ from snake_logger import Log_Stream
 # HEIGHT = 8
 
 WIDTH = 8
-HEIGHT = 8
+HEIGHT = 6
 
 # RESTRICTED_TILES = [(4,4),(3,4),(4,3),(5,4),(4,5)]
-# RESTRICTED_TILES = [(1, 1), (2, 1), (3, 4), (4, 4)]
-RESTRICTED_TILES = []
+# RESTRICTED_TILES = [(1, 1), (2, 1), (5, 6), (6, 6)]
+RESTRICTED_TILES = [(1, 1), (2, 1), (5, 4), (6, 4)]
 
 
 AVAILABLE_TILES = WIDTH * HEIGHT - len(RESTRICTED_TILES)
@@ -107,7 +110,7 @@ while len(current_state) < AVAILABLE_TILES:
         # We have not found a new cycle based on a optimal a* path
 
         # find the optimal path to the apple
-        optimal_path = pathfinding.astar(WIDTH, HEIGHT, current_state[-1], current_apple_position, RESTRICTED_TILES)
+        optimal_path = pathfinding.astar(WIDTH, HEIGHT, current_state[-1], current_apple_position, RESTRICTED_TILES + current_state)
 
         if optimal_path:
             # Pathfinding succeded!
